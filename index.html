@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タネワザ｜アイデア×多職種の座組みプラットフォーム</title>
+<meta name="description" content="アイデアはあるけど作れない人と、エンジニア・デザイナー・作曲家・ライター・企画の作り手が、対等なクルーとして出会う掲示板。無償×クレジット分配で、一緒に世に出そう。">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="タネワザ">
+<meta property="og:title" content="タネワザ｜アイデア×多職種の座組みプラットフォーム">
+<meta property="og:description" content="アイデアはあるけど作れない人と、エンジニア・デザイナー・作曲家・ライター・企画の作り手が、対等なクルーとして出会う掲示板。無償×クレジット分配で、一緒に世に出そう。">
+<meta property="og:image" content="/public/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="タネワザ｜アイデア×多職種の座組みプラットフォーム">
+<meta name="twitter:description" content="アイデアはあるけど作れない人と、多職種の作り手が対等なクルーとして出会う掲示板。無償×クレジット分配で、一緒に世に出そう。">
+<meta name="twitter:image" content="/public/og.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/public/favicon.png">
+<link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Big+Shoulders+Text:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="paper-texture" aria-hidden="true"></div>
+
+<header class="masthead">
+  <div class="masthead__inner">
+    <p class="masthead__kicker">IDEA &times; CREW BULLETIN</p>
+    <h1 class="masthead__title">タネワザ</h1>
+    <p class="masthead__sub">アイデアの種と、座組みを組む技を、ここで交換する。</p>
+  </div>
+  <dl class="indicia" aria-label="このページについて">
+    <div><dt>発行</dt><dd>いつでも</dd></div>
+    <div><dt>号数</dt><dd>β版</dd></div>
+    <div><dt>定価</dt><dd>無料</dd></div>
+  </dl>
+</header>
+
+<nav class="toc" aria-label="目次">
+  <a href="#vs-section">外注サービスとの違い</a>
+  <a href="#board">座組み中のプロジェクト</a>
+  <a href="#creator-heading">作り手を探す</a>
+  <a href="#showcase-section">ショーケース</a>
+  <a href="#partners-section">拡散パートナー</a>
+</nav>
+
+<hr class="rule">
+
+<section class="lead">
+  <p class="lead__text">
+    つくりたいのに、ひとりじゃつくれない。エンジニアも、デザイナーも、作曲家も、ライターも、企画屋も、みんな誰かの「座組み」を待っている。タネワザは、アイデアの持ち主が声をかけ、得意技を持つ作り手たちが集まる掲示板です。気になったら、いいねを送るだけでいい。
+  </p>
+</section>
+
+<hr class="rule rule--dotted">
+
+<section class="vs" id="vs-section" aria-labelledby="vs-heading">
+  <p class="vs__kicker">HIRING vs CREWING</p>
+  <h2 class="vs__catch" id="vs-heading">外注サービスは<em>“頼む”</em>場所。<br>タネワザは<em>“組む”</em>場所。</h2>
+
+  <div class="vs__table">
+    <div class="vs__head">
+      <p class="vs__label" aria-hidden="true"></p>
+      <p class="vs__colhead vs__colhead--them">外注サービス</p>
+      <p class="vs__colhead vs__colhead--us">タネワザ</p>
+    </div>
+    <div class="vs__row">
+      <p class="vs__label">お金</p>
+      <p class="vs__them">発注 → 納品</p>
+      <p class="vs__us">無償 × クレジット分配</p>
+    </div>
+    <div class="vs__row">
+      <p class="vs__label">関係</p>
+      <p class="vs__them">発注者と受注者</p>
+      <p class="vs__us">対等なクルー</p>
+    </div>
+    <div class="vs__row">
+      <p class="vs__label">成果</p>
+      <p class="vs__them">納品して終わり</p>
+      <p class="vs__us">共同名義で世に出して実績になる</p>
+    </div>
+  </div>
+
+  <p class="vs__closing">頼みたい人には、外注サービスを。<br><strong>仲間と作りたい人は、ここへ。</strong></p>
+</section>
+
+<hr class="rule rule--dotted">
+
+<main class="board" id="board">
+
+  <section class="column column--idea" aria-labelledby="idea-heading">
+    <header class="column__head">
+      <h2 id="idea-heading" class="column__title">CREW WANTED</h2>
+      <p class="column__sub">座組みを募集中のプロジェクト</p>
+    </header>
+    <div class="honki-filter">
+      <button type="button" class="honki-filter__btn" id="honki-filter-btn" aria-pressed="false">
+        <span class="honki-filter__seal" aria-hidden="true">本気</span>の座組みだけ見る
+      </button>
+    </div>
+    <div class="cards" id="idea-cards"></div>
+  </section>
+
+  <div class="board__divider" aria-hidden="true"></div>
+
+  <section class="column column--engineer" aria-labelledby="engineer-heading">
+    <header class="column__head">
+      <h2 id="engineer-heading" class="column__title">MAKERS WANTED</h2>
+      <p class="column__sub" id="creator-heading">職種で探す作り手たち</p>
+    </header>
+    <div class="role-filter" id="role-filter" role="group" aria-label="職種で絞り込む"></div>
+    <p class="column__note">タネワザは身分証を預かりません。作り手の実在は、公開された作品で確認できます。</p>
+    <div class="cards" id="engineer-cards"></div>
+  </section>
+
+</main>
+
+<hr class="rule rule--dotted">
+
+<section class="matches" id="matches-section" aria-labelledby="matches-heading">
+  <header class="column__head matches__head">
+    <h2 id="matches-heading" class="column__title">MATCHED</h2>
+    <p class="column__sub">マッチした相手</p>
+  </header>
+  <p class="matches__empty" id="matches-empty">まだマッチはありません。気になる相手に「いいね」を送ってみましょう。</p>
+  <ul class="matches__list" id="matches-list"></ul>
+</section>
+
+<hr class="rule rule--dotted">
+
+<section class="showcase" id="showcase-section" aria-labelledby="showcase-heading">
+  <header class="column__head showcase__head">
+    <h2 id="showcase-heading" class="column__title">SHOWCASE</h2>
+    <p class="column__sub">タネワザから生まれた座組みたち</p>
+  </header>
+
+  <ul class="showcase__list" id="showcase-list"></ul>
+
+  <div class="showcase__cta">
+    <p class="showcase__cta-text">あなたの座組みも、公式SNSで紹介されるかもしれません。</p>
+    <button class="showcase__cta-button" id="showcase-cta-button" type="button">公式SNSをフォローする</button>
+    <p class="showcase__cta-note" id="showcase-cta-note" hidden>準備中です。公式アカウントの開設をお楽しみに。</p>
+  </div>
+</section>
+
+<hr class="rule rule--dotted">
+
+<section class="partners" id="partners-section" aria-labelledby="partners-heading">
+  <header class="column__head partners__head">
+    <p class="partners__ribbon">COMING SOON</p>
+    <h2 id="partners-heading" class="column__title">拡散パートナー募集</h2>
+    <p class="column__sub">企業・広報のみなさまへ</p>
+  </header>
+
+  <p class="partners__body">
+    タネワザから生まれた座組みやプロジェクトを、企業・メディアのみなさまと一緒に広めていく仕組みを準備しています。取材、協賛、イベント連携など、ご興味があればぜひ事前登録をお願いします。
+  </p>
+
+  <form class="partners__form" id="partners-form">
+    <label class="partners__field">
+      <span>会社名・団体名</span>
+      <input type="text" name="company" required>
+    </label>
+    <label class="partners__field">
+      <span>ご担当者名</span>
+      <input type="text" name="contact" required>
+    </label>
+    <label class="partners__field">
+      <span>メールアドレス</span>
+      <input type="email" name="email" required>
+    </label>
+    <label class="partners__field partners__field--wide">
+      <span>ご興味の内容（任意）</span>
+      <textarea name="interest" rows="2" placeholder="例）取材・掲載、協賛、イベント連携など"></textarea>
+    </label>
+    <button class="partners__submit" type="submit">事前登録する</button>
+  </form>
+
+  <p class="partners__confirm" id="partners-confirm" hidden>
+    事前登録ありがとうございます。（プロトタイプのため送信は行われません）
+  </p>
+  <p class="partners__error" id="partners-error" hidden>
+    送信できませんでした。時間をおいてもう一度お試しください。
+  </p>
+</section>
+
+<footer class="site-footer">
+  <p class="site-footer__brand">タネワザ</p>
+  <p class="site-footer__note">この画面はプロトタイプです。プロフィール、募集ロールの残り枠、「いいね」の反応、合意テンプレ、メッセージ、事前登録フォームはすべてダミーデータで動き、進行状況はこのブラウザ内にのみ保存されます。</p>
+  <p class="site-footer__stamp">PROTOTYPE No.001</p>
+  <ul class="site-footer__links">
+    <li><a href="pricing.html">料金</a></li>
+    <li><a href="guidelines.html">コミュニティガイドライン</a></li>
+    <li><a href="terms.html">利用規約</a></li>
+    <li><a href="privacy.html">プライバシーポリシー</a></li>
+    <li><a href="operator.html">運営者情報</a></li>
+  </ul>
+</footer>
+
+<div class="overlay" id="detail-overlay" hidden>
+  <div class="overlay__scrim" data-close="detail"></div>
+  <div class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-name">
+    <button class="detail-panel__close" type="button" data-close="detail" aria-label="閉じる">&times;</button>
+    <span class="detail-panel__code" id="detail-code"></span>
+    <div class="detail-panel__top">
+      <span class="detail-panel__icon" id="detail-icon"></span>
+      <div>
+        <h3 class="detail-panel__name" id="detail-name"></h3>
+        <span class="card__role-badge" id="detail-role-badge" hidden></span>
+        <span class="card__verified" id="detail-verified" hidden title="実績リンク連携済み">✓ 連携済み</span>
+      </div>
+      <span class="honki-seal honki-seal--static" id="detail-honki" hidden
+        title="発案者がこの座組みに、1人1枠しかない本気の印を灯しています"><span>本気</span></span>
+    </div>
+    <p class="detail-panel__catch" id="detail-catch"></p>
+    <p class="detail-panel__bio" id="detail-bio"></p>
+    <p class="detail-panel__section-label" id="detail-tags-label"></p>
+    <ul class="detail-panel__tags" id="detail-tags"></ul>
+    <p class="detail-panel__section-label" id="detail-links-label" hidden>実績リンク</p>
+    <ul class="detail-panel__links" id="detail-links" hidden></ul>
+    <p class="detail-panel__note" id="detail-links-note" hidden>タネワザは身分証を預かりません。作り手の実在は、公開された作品で確認できます。</p>
+    <button class="stamp-btn detail-panel__like" id="detail-like" type="button">
+      <span class="stamp-btn__label">いいね</span>
+    </button>
+    <a class="detail-panel__report" id="detail-report" href="#">このプロフィールを通報する</a>
+  </div>
+</div>
+
+<div class="match-overlay" id="match-overlay" hidden>
+  <div class="match-overlay__scrim" data-close></div>
+  <div class="match-bulletin" role="dialog" aria-modal="true" aria-labelledby="match-heading">
+    <button class="match-bulletin__x" type="button" data-close aria-label="閉じる">&times;</button>
+    <p class="match-bulletin__kicker">号外</p>
+    <p class="match-bulletin__stamp">MATCH!</p>
+    <div class="match-bulletin__portraits">
+      <div class="match-portrait match-portrait--you">
+        <span class="match-portrait__icon" data-icon="you"></span>
+        <span class="match-portrait__name">あなた</span>
+      </div>
+      <svg class="match-string" viewBox="0 0 160 60" aria-hidden="true">
+        <path d="M8 12 C 50 55, 110 55, 152 10" />
+        <circle cx="8" cy="12" r="4" />
+        <circle cx="152" cy="10" r="4" />
+      </svg>
+      <div class="match-portrait match-portrait--them">
+        <span class="match-portrait__icon" id="match-icon"></span>
+        <span class="match-portrait__name" id="match-name"></span>
+      </div>
+    </div>
+    <p class="match-bulletin__body" id="match-heading">
+      <span id="match-partner-name"></span>さんと、両想いです。<br>
+      権利・条件テンプレに合意すると、座組みが成立します。
+    </p>
+    <div class="match-bulletin__actions">
+      <button class="match-bulletin__message" id="match-agree" type="button">条件を決める</button>
+      <button class="match-bulletin__close" id="match-later" type="button">あとで</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay overlay--sheet" id="agree-overlay" hidden>
+  <div class="overlay__scrim" data-close></div>
+  <div class="tpl-panel" role="dialog" aria-modal="true" aria-labelledby="agree-title">
+    <button class="detail-panel__close" type="button" data-close aria-label="閉じる">&times;</button>
+    <h3 class="tpl-panel__title" id="agree-title">権利・条件テンプレを選ぶ</h3>
+    <p class="tpl-panel__sub" id="agree-sub"></p>
+    <ul class="tpl-panel__list" id="agree-list" role="radiogroup" aria-label="権利・条件テンプレ"></ul>
+    <button class="agree-submit" id="agree-submit" type="button" disabled>このテンプレで合意する</button>
+  </div>
+</div>
+
+<div class="overlay" id="chat-overlay" hidden>
+  <div class="overlay__scrim" data-close="chat"></div>
+  <div class="chat-panel" role="dialog" aria-modal="true" aria-labelledby="chat-name">
+    <header class="chat-panel__header">
+      <span class="chat-panel__icon" id="chat-icon"></span>
+      <div class="chat-panel__heading">
+        <p class="chat-panel__name" id="chat-name"></p>
+        <p class="chat-panel__code" id="chat-code"></p>
+      </div>
+      <button class="chat-panel__close" type="button" data-close="chat" aria-label="閉じる">&times;</button>
+    </header>
+    <div class="chat-panel__log" id="chat-log"></div>
+    <form class="chat-panel__form" id="chat-form">
+      <input class="chat-panel__input" id="chat-input" type="text" placeholder="メッセージを入力…" autocomplete="off" maxlength="200">
+      <button class="chat-panel__send" type="submit">送る</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // 事前登録フォームの送信先。Formspree のエンドポイント URL
+  // （例: "https://formspree.io/f/xxxxxxxx"）を設定すると実際に送信されます。
+  // 空のままの場合はダミー動作（送信せず完了メッセージ表示）になります。
+  window.TANEWAZA_CONFIG = {
+    formspreeEndpoint: ""
+  };
+</script>
+<script src="script.js"></script>
+</body>
+</html>
