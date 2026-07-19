@@ -171,7 +171,9 @@
     タネワザから生まれた座組みやプロジェクトを、企業・メディアのみなさまと一緒に広めていく仕組みを準備しています。取材、協賛、イベント連携など、ご興味があればぜひ事前登録をお願いします。
   </p>
 
-  <form class="partners__form" id="partners-form">
+  <form class="partners__form" id="partners-form" action="https://formspree.io/f/xlgqbqqp" method="POST">
+    <input type="hidden" name="_subject" value="タネワザ 拡散パートナー事前登録">
+    <input type="text" class="partners__gotcha" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
     <label class="partners__field">
       <span>会社名・団体名</span>
       <input type="text" name="company" required>
@@ -308,7 +310,7 @@
   // （例: "https://formspree.io/f/xxxxxxxx"）を設定すると実際に送信されます。
   // 空のままの場合はダミー動作（送信せず完了メッセージ表示）になります。
   window.TANEWAZA_CONFIG = {
-    formspreeEndpoint: ""
+    formspreeEndpoint: "https://formspree.io/f/xlgqbqqp"
   };
 </script>
 <script src="script.js"></script>

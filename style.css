@@ -1429,6 +1429,16 @@ body{
   resize: vertical;
 }
 
+/* ハニーポット ― 人間には見えず、ボットだけが入力する */
+.partners__gotcha{
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .partners__submit{
   grid-column: 1 / -1;
   justify-self: start;
