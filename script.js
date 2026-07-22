@@ -859,11 +859,19 @@
         body: new FormData(partnersForm),
         headers: { Accept: "application/json" },
       });
-      if (!res.ok) throw new Error(`Formspree responded ${res.status}`);
+      // Formspree はバリデーション失敗時 200 + {ok:false, errors:[...]} を返すことがある
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.ok === false) {
+        const detail = Array.isArray(data.errors)
+          ? data.errors.map((e) => e.message).join(", ")
+          : `HTTP ${res.status}`;
+        throw new Error(`Formspree: ${detail}`);
+      }
       partnersForm.hidden = true;
       partnersConfirm.textContent = "事前登録ありがとうございます。内容を確認のうえ、ご連絡いたします。";
       partnersConfirm.hidden = false;
-    } catch {
+    } catch (err) {
+      console.error("[partners] Formspree送信エラー:", err);
       partnersError.hidden = false;
     } finally {
       submitBtn.disabled = false;
