@@ -225,7 +225,15 @@
       <summary class="faq__q">無償で作ったものに、後から収益が出たらどうなりますか？</summary>
       <div class="faq__a">
         <p>どのテンプレを選んでいても、<strong>収益が出たら参加者全員で分配するのが原則です。</strong>「制作時は無償」の共同クレジット型やポートフォリオ型でも、あとから収益が発生した場合は全員で分け合います。</p>
-        <p>分配の割合は運営が決めません。<b>参加者どうしの話し合いで決めてください。</b>もし最初から収益化を見込んでいるなら、レベニューシェア型を選んでおくと前提がはっきりします。</p>
+        <p>分配の割合は運営が決めません。<b>参加者どうしの話し合いで決めてください。</b>もし最初から収益化を見込んでいるなら、レベニューシェア型を選んでおくと前提がはっきりします。合意時に「配分の取り決め」を記録しておくと、後から見返せて揉めにくくなります。</p>
+      </div>
+    </details>
+
+    <details class="faq__item">
+      <summary class="faq__q">この取り決めは契約書になりますか？</summary>
+      <div class="faq__a">
+        <p><strong>いいえ。この取り決めはタネワザ上の記録であり、法的な契約書ではありません。</strong>大きな金額が動く可能性がある場合は、参加者間で別途書面を交わすことを強くおすすめします。</p>
+        <p>タネワザは、参加者間の金銭トラブルについて責任を負いません。取り決めは「先に何を約束したか」を全員で確認するための記録として活用してください。</p>
       </div>
     </details>
   </div>
@@ -352,11 +360,48 @@
   <div class="overlay__scrim" data-close></div>
   <div class="tpl-panel" role="dialog" aria-modal="true" aria-labelledby="agree-title">
     <button class="detail-panel__close" type="button" data-close aria-label="閉じる">&times;</button>
-    <h3 class="tpl-panel__title" id="agree-title">権利・条件テンプレを選ぶ</h3>
+    <h3 class="tpl-panel__title" id="agree-title">権利・条件を決める</h3>
     <p class="tpl-panel__principle" id="agree-principle"></p>
     <p class="tpl-panel__sub" id="agree-sub"></p>
+
+    <p class="tpl-panel__step">1. テンプレを選ぶ</p>
     <ul class="tpl-panel__list" id="agree-list" role="radiogroup" aria-label="権利・条件テンプレ"></ul>
-    <button class="agree-submit" id="agree-submit" type="button" disabled>このテンプレで合意する</button>
+
+    <div class="arrange" id="agree-arrangement" hidden>
+      <p class="tpl-panel__step">2. 配分の取り決めを記録する</p>
+
+      <fieldset class="arrange__group">
+        <legend class="arrange__legend">収益分配の方法</legend>
+        <label class="arrange__radio"><input type="radio" name="arr-method" value="均等に分配する"><span>均等に分配する</span></label>
+        <label class="arrange__radio"><input type="radio" name="arr-method" value="貢献度に応じて分配する"><span>貢献度に応じて分配する（詳細は下の自由記述へ）</span></label>
+        <label class="arrange__radio"><input type="radio" name="arr-method" value="発案者と作り手で比率を決める"><span>発案者と作り手で比率を決める</span></label>
+        <input type="text" class="arrange__other" id="arr-method-ratio" placeholder="例）発案者50％・作り手50％" hidden>
+      </fieldset>
+
+      <div class="arrange__group">
+        <label class="arrange__legend" for="arr-detail">具体的な取り決め（必須）</label>
+        <textarea class="arrange__text" id="arr-detail" rows="2" placeholder="例）3名で均等（各33.3％）／発案者40％、エンジニア40％、デザイナー20％"></textarea>
+      </div>
+
+      <fieldset class="arrange__group">
+        <legend class="arrange__legend">途中離脱時の扱い</legend>
+        <label class="arrange__radio"><input type="radio" name="arr-leave" value="離脱時点までの貢献分を分配対象とする"><span>離脱時点までの貢献分を分配対象とする</span></label>
+        <label class="arrange__radio"><input type="radio" name="arr-leave" value="離脱した場合は分配対象外とする"><span>離脱した場合は分配対象外とする</span></label>
+        <label class="arrange__radio"><input type="radio" name="arr-leave" value="その他"><span>その他</span></label>
+        <input type="text" class="arrange__other" id="arr-leave-other" placeholder="離脱時の扱いを記入" hidden>
+      </fieldset>
+
+      <fieldset class="arrange__group">
+        <legend class="arrange__legend">権利の帰属</legend>
+        <label class="arrange__radio"><input type="radio" name="arr-rights" value="参加者全員の共有"><span>参加者全員の共有</span></label>
+        <label class="arrange__radio"><input type="radio" name="arr-rights" value="発案者に帰属し、他メンバーは実績として公開可能"><span>発案者に帰属し、他メンバーは実績として公開可能</span></label>
+        <label class="arrange__radio"><input type="radio" name="arr-rights" value="その他"><span>その他</span></label>
+        <input type="text" class="arrange__other" id="arr-rights-other" placeholder="権利の帰属を記入" hidden>
+      </fieldset>
+    </div>
+
+    <p class="tpl-panel__note" id="agree-note"></p>
+    <button class="agree-submit" id="agree-submit" type="button" disabled>この内容で合意する</button>
   </div>
 </div>
 

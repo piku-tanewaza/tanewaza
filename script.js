@@ -32,7 +32,10 @@
      権利・条件テンプレ ― both sides must agree before a match forms
   --------------------------------------------------------------- */
   const AGREEMENT_PRINCIPLE =
-    "タネワザの座組みでは、収益が発生した場合は必ず参加者全員で分配します。分配の割合は、運営が定めるものではなく、参加者どうしの話し合いで決めてください。";
+    "収益が発生した場合は、参加者全員で分配します。割合は運営が定めず、参加者どうしで決めて、ここに記録します。";
+
+  const AGREEMENT_NOTE =
+    "この取り決めはタネワザ上の記録であり、法的な契約書ではありません。大きな金額が動く可能性がある場合は、参加者間で別途書面を交わすことを強くおすすめします。タネワザは参加者間の金銭トラブルについて責任を負いません。";
 
   const AGREEMENT_TEMPLATES = [
     { id: "credit",    name: "共同クレジット型",   desc: "制作時は無償。成果物は参加メンバー全員の共同名義で記載します。収益が発生した場合は、参加者全員で割合を話し合って分配します。" },
@@ -168,6 +171,7 @@
           liked: entry.liked,
           mutual: entry.mutual,
           agreement: entry.agreement,
+          arrangement: entry.arrangement,
           messages: entry.messages,
           replyIndex: entry.replyIndex,
         };
@@ -183,6 +187,13 @@
     ["you", "them", "system"].includes(m.from) &&
     typeof m.text === "string";
 
+  const isValidArrangement = (a) =>
+    a && typeof a === "object" &&
+    typeof a.method === "string" &&
+    typeof a.detail === "string" &&
+    typeof a.leave === "string" &&
+    typeof a.rights === "string";
+
   const stored = safeLoad();
   const state = new Map(
     allProfiles.map((p) => {
@@ -191,6 +202,7 @@
         liked: !!(s && s.liked),
         mutual: !!(s && s.mutual),
         agreement: (s && typeof s.agreement === "string") ? s.agreement : null,
+        arrangement: (s && isValidArrangement(s.arrangement)) ? s.arrangement : null,
         messages: (s && Array.isArray(s.messages)) ? s.messages.filter(isValidMessage) : [],
         replyIndex: (s && Number.isInteger(s.replyIndex) && s.replyIndex >= 0) ? s.replyIndex : 0,
       }];
@@ -627,9 +639,26 @@
   const agreePrinciple = document.getElementById("agree-principle");
   const agreeSub = document.getElementById("agree-sub");
   const agreeList = document.getElementById("agree-list");
+  const agreeArrangement = document.getElementById("agree-arrangement");
+  const agreeNote = document.getElementById("agree-note");
   const agreeSubmit = document.getElementById("agree-submit");
+  const arrDetail = document.getElementById("arr-detail");
+  const arrMethodRatio = document.getElementById("arr-method-ratio");
+  const arrLeaveOther = document.getElementById("arr-leave-other");
+  const arrRightsOther = document.getElementById("arr-rights-other");
   let agreeFor = null;
   let agreeSelection = null;
+
+  const radioValue = (name) => {
+    const el = agreeArrangement.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : null;
+  };
+
+  function resetArrangementForm() {
+    agreeArrangement.querySelectorAll("input[type=radio]").forEach((r) => (r.checked = false));
+    [arrDetail, arrMethodRatio, arrLeaveOther, arrRightsOther].forEach((el) => (el.value = ""));
+    [arrMethodRatio, arrLeaveOther, arrRightsOther].forEach((el) => (el.hidden = true));
+  }
 
   function openAgreement(code) {
     const profile = profileByCode.get(code);
@@ -637,7 +666,8 @@
     agreeFor = code;
     agreeSelection = null;
     agreePrinciple.textContent = AGREEMENT_PRINCIPLE;
-    agreeSub.textContent = `${profile.name}さんとの座組みの進め方を選んでください。合意すると座組みが成立します。`;
+    agreeNote.textContent = AGREEMENT_NOTE;
+    agreeSub.textContent = `${profile.name}さんとの座組みです。テンプレを選び、配分の取り決めを記録して合意します。`;
     agreeList.innerHTML = AGREEMENT_TEMPLATES.map((t) => `
       <li>
         <button type="button" class="agree-option" role="radio" aria-checked="false" data-tpl="${t.id}">
@@ -646,7 +676,10 @@
         </button>
       </li>
     `).join("");
+    resetArrangementForm();
+    agreeArrangement.hidden = true;
     agreeSubmit.disabled = true;
+    agreeOverlay.querySelector(".tpl-panel").scrollTop = 0;
     openOverlay(agreeOverlay, agreeList.querySelector(".agree-option"));
   }
 
@@ -659,21 +692,64 @@
       b.classList.toggle("is-selected", selected);
       b.setAttribute("aria-checked", String(selected));
     });
-    agreeSubmit.disabled = false;
+    agreeArrangement.hidden = false;
+    validateAgreement();
   });
+
+  // 「その他」「比率」を選んだら自由記述欄を表示
+  agreeArrangement.addEventListener("change", (e) => {
+    if (e.target.name === "arr-method") {
+      arrMethodRatio.hidden = e.target.value !== "発案者と作り手で比率を決める";
+      if (arrMethodRatio.hidden) arrMethodRatio.value = "";
+    }
+    if (e.target.name === "arr-leave") {
+      arrLeaveOther.hidden = e.target.value !== "その他";
+      if (arrLeaveOther.hidden) arrLeaveOther.value = "";
+    }
+    if (e.target.name === "arr-rights") {
+      arrRightsOther.hidden = e.target.value !== "その他";
+      if (arrRightsOther.hidden) arrRightsOther.value = "";
+    }
+    validateAgreement();
+  });
+  agreeArrangement.addEventListener("input", validateAgreement);
+
+  function collectArrangement() {
+    const method = radioValue("arr-method");
+    const leave = radioValue("arr-leave");
+    const rights = radioValue("arr-rights");
+    if (!method || !leave || !rights) return null;
+    if (!arrDetail.value.trim()) return null;
+    if (method === "発案者と作り手で比率を決める" && !arrMethodRatio.value.trim()) return null;
+    if (leave === "その他" && !arrLeaveOther.value.trim()) return null;
+    if (rights === "その他" && !arrRightsOther.value.trim()) return null;
+
+    const methodText = method === "発案者と作り手で比率を決める"
+      ? `発案者と作り手で比率を決める（${arrMethodRatio.value.trim()}）`
+      : method;
+    const leaveText = leave === "その他" ? `その他：${arrLeaveOther.value.trim()}` : leave;
+    const rightsText = rights === "その他" ? `その他：${arrRightsOther.value.trim()}` : rights;
+    return { method: methodText, detail: arrDetail.value.trim(), leave: leaveText, rights: rightsText };
+  }
+
+  function validateAgreement() {
+    agreeSubmit.disabled = !(agreeSelection && collectArrangement());
+  }
 
   agreeSubmit.addEventListener("click", () => {
     const code = agreeFor;
     const tpl = AGREEMENT_TEMPLATES.find((t) => t.id === agreeSelection);
+    const arrangement = collectArrangement();
     const entry = state.get(code);
     const profile = profileByCode.get(code);
-    if (!entry || !tpl || !profile || entry.agreement) return;
+    if (!entry || !tpl || !arrangement || !profile || entry.agreement) return;
 
     entry.agreement = tpl.name;
+    entry.arrangement = arrangement;
     if (entry.messages.length === 0) {
       entry.messages.push({ from: "system", text: `${profile.name}さんとマッチしました。` });
     }
-    entry.messages.push({ from: "system", text: `権利・条件テンプレ「${tpl.name}」で合意しました。挨拶を送ってみましょう。` });
+    entry.messages.push({ from: "system", text: `「${tpl.name}」で合意し、配分の取り決めを記録しました。挨拶を送ってみましょう。` });
 
     syncStampButtons(code);
     addMatchRow(code);
@@ -699,16 +775,28 @@
     if (!profile || !entry || !entry.agreement) return;
     matchesEmpty.hidden = true;
 
+    const a = entry.arrangement;
+    const termsHTML = a ? `
+      <dl class="match-row__terms">
+        <div><dt>収益分配</dt><dd>${escapeHTML(a.method)}</dd></div>
+        <div><dt>取り決め</dt><dd>${escapeHTML(a.detail)}</dd></div>
+        <div><dt>離脱時</dt><dd>${escapeHTML(a.leave)}</dd></div>
+        <div><dt>権利</dt><dd>${escapeHTML(a.rights)}</dd></div>
+      </dl>` : "";
+
     const li = document.createElement("li");
     li.innerHTML = `
       <div class="match-row" data-code="${code}">
-        <span class="match-row__icon">${iconSVG(profile.icon)}</span>
-        <div class="match-row__body">
-          <p class="match-row__name">${profile.name}</p>
-          <span class="match-row__badge">${escapeHTML(entry.agreement)}</span>
-          <p class="match-row__preview" data-preview>まだメッセージはありません。</p>
+        <div class="match-row__head">
+          <span class="match-row__icon">${iconSVG(profile.icon)}</span>
+          <div class="match-row__id">
+            <p class="match-row__name">${profile.name}</p>
+            <span class="match-row__badge">${escapeHTML(entry.agreement)}</span>
+          </div>
+          <button class="match-row__button" type="button" data-code="${code}">メッセージ</button>
         </div>
-        <button class="match-row__button" type="button" data-code="${code}">メッセージ</button>
+        ${termsHTML}
+        <p class="match-row__preview" data-preview>まだメッセージはありません。</p>
       </div>
     `;
     matchesList.appendChild(li);
