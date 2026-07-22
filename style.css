@@ -325,6 +325,13 @@ body{
 /* ==================================================================
    board / columns
 ================================================================== */
+/* 長い語（URL・英字の長いタグ等）でも枠を割らない保険 */
+.card__catch, .card__code, .card__name, .card__tags li,
+.role-chip, .card__role-badge, .column__note{
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
 .board{
   position: relative;
   z-index: 1;
@@ -408,11 +415,17 @@ body{
   .role-filter__btn{ flex: none; white-space: nowrap; }
 }
 
+/* グリッド/フレックスの子は min-width:auto だと中身の最小幅で潰れず
+   トラックを押し広げる。0 を明示して狭い画面でも確実に収める */
+.column{ min-width: 0; }
+
 .cards{
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.7rem;
+  min-width: 0;
 }
+.cards > .card{ min-width: 0; }
 @media (min-width: 640px){
   .cards{ grid-template-columns: repeat(2, 1fr); }
 }
