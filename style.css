@@ -1509,6 +1509,16 @@ body{
   font-size: 1.1rem;
   margin: 0 0 .3rem;
 }
+.tpl-panel__principle{
+  font-size: .82rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--idea-tint);
+  border: 1px solid var(--idea);
+  border-radius: 3px;
+  padding: .7rem .85rem;
+  margin: 0 0 .9rem;
+}
 .tpl-panel__sub{
   font-size: .84rem;
   color: var(--ink-soft);

@@ -31,10 +31,13 @@
   /* ---------------------------------------------------------------
      権利・条件テンプレ ― both sides must agree before a match forms
   --------------------------------------------------------------- */
+  const AGREEMENT_PRINCIPLE =
+    "タネワザの座組みでは、収益が発生した場合は必ず参加者全員で分配します。分配の割合は、運営が定めるものではなく、参加者どうしの話し合いで決めてください。";
+
   const AGREEMENT_TEMPLATES = [
-    { id: "credit",    name: "共同クレジット型",   desc: "無償で制作し、成果物には参加メンバー全員の名前を共同名義で記載します。" },
-    { id: "revshare",  name: "レベニューシェア型", desc: "収益が発生した場合、貢献度に応じて分配します。割合はチャットで相談して決めます。" },
-    { id: "portfolio", name: "ポートフォリオ型",   desc: "実績づくりを主目的に、各自が担当パートを自身のポートフォリオへ自由に掲載できます。" },
+    { id: "credit",    name: "共同クレジット型",   desc: "制作時は無償。成果物は参加メンバー全員の共同名義で記載します。収益が発生した場合は、参加者全員で割合を話し合って分配します。" },
+    { id: "revshare",  name: "レベニューシェア型", desc: "最初から収益化を見込む企画向け。収益が発生したら貢献度に応じて分配し、割合はチャットで相談して決めます。" },
+    { id: "portfolio", name: "ポートフォリオ型",   desc: "実績づくりが主目的。各自が担当パートを自分の実績として公開できます。収益が発生した場合は、参加者全員で割合を話し合って分配します。" },
   ];
 
   /* ---------------------------------------------------------------
@@ -621,6 +624,7 @@
      MATCHED に追加される（プロジェクト側・作り手側で共通の経路）
   --------------------------------------------------------------- */
   const agreeOverlay = document.getElementById("agree-overlay");
+  const agreePrinciple = document.getElementById("agree-principle");
   const agreeSub = document.getElementById("agree-sub");
   const agreeList = document.getElementById("agree-list");
   const agreeSubmit = document.getElementById("agree-submit");
@@ -632,6 +636,7 @@
     if (!profile) return;
     agreeFor = code;
     agreeSelection = null;
+    agreePrinciple.textContent = AGREEMENT_PRINCIPLE;
     agreeSub.textContent = `${profile.name}さんとの座組みの進め方を選んでください。合意すると座組みが成立します。`;
     agreeList.innerHTML = AGREEMENT_TEMPLATES.map((t) => `
       <li>
