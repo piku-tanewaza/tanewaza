@@ -1593,6 +1593,164 @@ body{
 .site-footer__links a:hover{ color: var(--ink); border-bottom-color: var(--ink); }
 
 /* ==================================================================
+   AI teaser ― coming soon feature announcement
+================================================================== */
+.ai-teaser{
+  position: relative;
+  z-index: 1;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.ai-teaser__ribbon{
+  display: inline-block;
+  font-family: var(--font-utility);
+  font-weight: 700;
+  font-size: .7rem;
+  letter-spacing: .18em;
+  color: var(--eng);
+  border: 1px solid var(--eng);
+  padding: .15rem .6rem;
+  border-radius: 2px;
+  transform: rotate(-2deg);
+  margin: 0 0 1rem;
+}
+
+.ai-teaser__headline{
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.35;
+  margin: 0 0 1.1rem;
+}
+
+.ai-teaser__lead{
+  max-width: 38rem;
+  margin: 0 auto 1.8rem;
+  color: var(--ink-soft);
+  font-size: clamp(.98rem, 1.6vw, 1.1rem);
+}
+
+.ai-teaser__list{
+  list-style: none;
+  margin: 0 auto 1.6rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .8rem;
+  max-width: 44rem;
+  counter-reset: none;
+}
+.ai-teaser__list li{
+  border: 1px solid var(--line);
+  background: var(--paper-card);
+  padding: .9rem .6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  font-size: .86rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.ai-teaser__num{
+  font-family: var(--font-utility);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--eng);
+  letter-spacing: .04em;
+}
+@media (max-width: 620px){
+  .ai-teaser__list{ grid-template-columns: repeat(2, 1fr); }
+}
+
+.ai-teaser__note{
+  max-width: 40rem;
+  margin: 0 auto;
+  font-size: .82rem;
+  color: var(--ink-soft);
+  border: 1px dashed var(--line);
+  border-radius: 3px;
+  padding: .7rem 1rem;
+}
+
+/* ==================================================================
+   FAQ ― reader questions (accordion)
+================================================================== */
+.faq{
+  position: relative;
+  z-index: 1;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+.faq__head{ color: var(--idea); }
+
+.faq__list{
+  border-top: 1px solid var(--line);
+}
+
+.faq__item{
+  border-bottom: 1px solid var(--line);
+}
+
+.faq__q{
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.02rem, 1.8vw, 1.18rem);
+  color: var(--ink);
+  padding: 1.1rem 2.2rem 1.1rem 0;
+  position: relative;
+}
+.faq__q::-webkit-details-marker{ display: none; }
+.faq__q::after{
+  content: "＋";
+  position: absolute;
+  right: .2rem;
+  top: 1rem;
+  font-family: var(--font-utility);
+  font-weight: 700;
+  color: var(--idea);
+  transition: transform .2s ease;
+}
+.faq__item[open] .faq__q::after{ content: "−"; }
+.faq__q:hover{ color: var(--idea-deep); }
+
+.faq__a{
+  padding: 0 0 1.3rem;
+  color: var(--ink-soft);
+  font-size: .95rem;
+}
+.faq__a p{ margin: 0 0 .8rem; }
+.faq__a p:last-child{ margin-bottom: 0; }
+.faq__a strong{ color: var(--ink); font-weight: 700; }
+.faq__a ul{
+  margin: 0 0 .8rem;
+  padding-left: 1.1rem;
+}
+.faq__a li{ margin-bottom: .5rem; }
+.faq__a li b{ color: var(--ink); }
+
+.faq__more a{
+  font-family: var(--font-utility);
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .03em;
+  color: var(--idea-deep);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.faq__more a:hover{ border-bottom-color: var(--idea-deep); }
+
+@media (prefers-reduced-motion: reduce){
+  .faq__q::after{ transition: none; }
+}
+
+/* ==================================================================
    document pages (terms / privacy / operator)
 ================================================================== */
 .doc{
@@ -1627,6 +1785,12 @@ body{
   font-size: .94rem;
   color: var(--ink-soft);
 }
+.doc ol, .doc ul{
+  margin: 0 0 1.1rem;
+  padding-left: 1.4rem;
+}
+.doc li{ margin-bottom: .55rem; }
+.doc li b{ color: var(--ink); }
 .doc__placeholder{
   border: 1px dashed var(--line);
   border-radius: 3px;
