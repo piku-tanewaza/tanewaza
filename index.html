@@ -46,12 +46,22 @@
   </div>
   <dl class="indicia" aria-label="このページについて">
     <div><dt>発行</dt><dd>いつでも</dd></div>
-    <div><dt>号数</dt><dd>β版</dd></div>
+    <div><dt>号数</dt><dd>創刊準備号</dd></div>
     <div><dt>定価</dt><dd>無料</dd></div>
   </dl>
 </header>
 
+<aside class="prelaunch" role="note" aria-label="創刊準備号のお知らせ">
+  <div class="prelaunch__inner">
+    <p class="prelaunch__eyebrow">創刊準備号</p>
+    <h2 class="prelaunch__title">この紙面の記事は見本です</h2>
+    <p class="prelaunch__body">掲載中のプロジェクト・作り手・ショーケースは、すべて紙面の見本です。タネワザは現在、創刊に向けて最初の座組みを募集しています。</p>
+    <a class="prelaunch__cta" href="#join-section">創刊メンバーに登録する →</a>
+  </div>
+</aside>
+
 <nav class="toc" aria-label="目次">
+  <a href="#join-section">創刊メンバー募集</a>
   <a href="#vs-section">外注サービスとの違い</a>
   <a href="#ai-section">AI企画支援</a>
   <a href="#board">座組み中のプロジェクト</a>
@@ -127,6 +137,7 @@
       <h2 id="idea-heading" class="column__title">CREW WANTED</h2>
       <p class="column__sub">座組みを募集中のプロジェクト</p>
     </header>
+    <p class="column__sample-note">※ 創刊準備号のため、掲載は見本です</p>
     <div class="honki-filter">
       <button type="button" class="honki-filter__btn" id="honki-filter-btn" aria-pressed="false">
         <span class="honki-filter__seal" aria-hidden="true">本気</span>の座組みだけ見る
@@ -142,6 +153,7 @@
       <h2 id="engineer-heading" class="column__title">MAKERS WANTED</h2>
       <p class="column__sub" id="creator-heading">職種で探す作り手たち</p>
     </header>
+    <p class="column__sample-note">※ 創刊準備号のため、掲載は見本です</p>
     <div class="role-filter" id="role-filter" role="group" aria-label="職種で絞り込む"></div>
     <p class="column__note">タネワザは身分証を預かりません。作り手の実在は、公開された作品で確認できます。</p>
     <div class="cards" id="engineer-cards"></div>
@@ -167,6 +179,7 @@
     <h2 id="showcase-heading" class="column__title">SHOWCASE</h2>
     <p class="column__sub">タネワザから生まれた座組みたち</p>
   </header>
+  <p class="column__sample-note">※ 創刊後の掲載イメージです</p>
 
   <ul class="showcase__list" id="showcase-list"></ul>
 
@@ -237,6 +250,60 @@
       </div>
     </details>
   </div>
+</section>
+
+<hr class="rule rule--dotted">
+
+<section class="join" id="join-section" aria-labelledby="join-heading">
+  <header class="column__head join__head">
+    <p class="join__eyebrow">創刊メンバー募集</p>
+    <h2 class="column__title" id="join-heading">創刊号に、あなたの座組みを載せませんか。</h2>
+  </header>
+
+  <p class="join__body">
+    タネワザは今、最初の座組みを探しています。アイデアを持っている人も、技を持っている人も、創刊メンバーとして登録できます。
+  </p>
+
+  <form class="partners__form join__form" id="join-form" action="https://formspree.io/f/xlgqbqqp" method="POST">
+    <input type="hidden" name="_subject" value="タネワザ 創刊メンバー登録">
+    <input type="text" class="partners__gotcha" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <label class="partners__field">
+      <span>お名前／活動名</span>
+      <input type="text" name="name" required>
+    </label>
+
+    <fieldset class="partners__field partners__field--wide join__role">
+      <legend>立場</legend>
+      <label class="join__radio"><input type="radio" name="role" value="アイデアを持っている" required><span>アイデアを持っている</span></label>
+      <label class="join__radio"><input type="radio" name="role" value="作り手として参加したい"><span>作り手として参加したい</span></label>
+      <label class="join__radio"><input type="radio" name="role" value="両方"><span>両方</span></label>
+    </fieldset>
+
+    <label class="partners__field partners__field--wide">
+      <span>できること・やりたいこと</span>
+      <textarea name="doing" rows="3" required placeholder="例）位置情報アプリのアイデアがあります／Unityでゲームを作れます"></textarea>
+    </label>
+
+    <label class="partners__field">
+      <span>連絡先メールアドレス</span>
+      <input type="email" name="email" required>
+    </label>
+
+    <label class="partners__field">
+      <span>X / GitHub / note などのURL（任意）</span>
+      <input type="url" name="links" placeholder="https://">
+    </label>
+
+    <button class="partners__submit" type="submit">創刊メンバーに登録する</button>
+  </form>
+
+  <p class="partners__confirm" id="join-confirm" hidden>
+    登録ありがとうございます。創刊に向けて、こちらからご連絡します。
+  </p>
+  <p class="partners__error" id="join-error" hidden>
+    送信できませんでした。時間をおいてもう一度お試しください。
+  </p>
 </section>
 
 <hr class="rule rule--dotted">

@@ -279,6 +279,7 @@
     return `
       <article class="card" style="--tilt:${tiltFor(index)}deg" data-code="${profile.code}">
         <span class="card__pin"></span>
+        <span class="card__sample">見本</span>
         ${seal}
         <span class="card__code">${profile.code}</span>
         <div class="card__top">
@@ -301,6 +302,7 @@
     return `
       <article class="card" style="--tilt:${tiltFor(index)}deg" data-code="${profile.code}">
         <span class="card__pin"></span>
+        <span class="card__sample">見本</span>
         <span class="card__code">${profile.code}</span>
         <div class="card__top">
           <span class="card__icon">${iconSVG(profile.icon)}</span>
@@ -909,7 +911,7 @@
     const list = document.getElementById("showcase-list");
     list.innerHTML = SHOWCASE_ITEMS.map((item) => `
       <li class="showcase-card">
-        <span class="showcase-card__badge">公式SNSで紹介されました</span>
+        <span class="showcase-card__badge">掲載イメージ</span>
         <p class="showcase-card__title">${item.title}</p>
         <ul class="showcase-card__crew">
           ${item.crew.map(([name, role]) => `<li><b>${name}</b> / ${role}</li>`).join("")}
@@ -923,53 +925,71 @@
   });
 
   /* ---------------------------------------------------------------
-     partners ― pre-registration form
+     Formspree フォーム共通ハンドラ
      window.TANEWAZA_CONFIG.formspreeEndpoint が設定されていれば
      Formspree に送信し、未設定ならダミー動作（送信なし）
   --------------------------------------------------------------- */
-  const partnersForm = document.getElementById("partners-form");
-  const partnersConfirm = document.getElementById("partners-confirm");
-  const partnersError = document.getElementById("partners-error");
   const formspreeEndpoint = (window.TANEWAZA_CONFIG || {}).formspreeEndpoint || "";
 
-  partnersForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    partnersError.hidden = true;
+  function wireFormspreeForm({ form, confirm, error, submitLabel, doneText, tag }) {
+    if (!form) return;
+    const submitBtn = form.querySelector('[type="submit"]');
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      error.hidden = true;
 
-    if (!formspreeEndpoint) {
-      partnersForm.hidden = true;
-      partnersConfirm.hidden = false;
-      return;
-    }
-
-    const submitBtn = partnersForm.querySelector(".partners__submit");
-    submitBtn.disabled = true;
-    submitBtn.textContent = "送信中…";
-
-    try {
-      const res = await fetch(formspreeEndpoint, {
-        method: "POST",
-        body: new FormData(partnersForm),
-        headers: { Accept: "application/json" },
-      });
-      // Formspree はバリデーション失敗時 200 + {ok:false, errors:[...]} を返すことがある
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || data.ok === false) {
-        const detail = Array.isArray(data.errors)
-          ? data.errors.map((e) => e.message).join(", ")
-          : `HTTP ${res.status}`;
-        throw new Error(`Formspree: ${detail}`);
+      if (!formspreeEndpoint) {
+        form.hidden = true;
+        confirm.hidden = false;
+        return;
       }
-      partnersForm.hidden = true;
-      partnersConfirm.textContent = "事前登録ありがとうございます。内容を確認のうえ、ご連絡いたします。";
-      partnersConfirm.hidden = false;
-    } catch (err) {
-      console.error("[partners] Formspree送信エラー:", err);
-      partnersError.hidden = false;
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = "事前登録する";
-    }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "送信中…";
+
+      try {
+        const res = await fetch(formspreeEndpoint, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        // Formspree はバリデーション失敗時 200 + {ok:false, errors:[...]} を返すことがある
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || data.ok === false) {
+          const detail = Array.isArray(data.errors)
+            ? data.errors.map((x) => x.message).join(", ")
+            : `HTTP ${res.status}`;
+          throw new Error(`Formspree: ${detail}`);
+        }
+        form.hidden = true;
+        if (doneText) confirm.textContent = doneText;
+        confirm.hidden = false;
+      } catch (err) {
+        console.error(`[${tag}] Formspree送信エラー:`, err);
+        error.hidden = false;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitLabel;
+      }
+    });
+  }
+
+  wireFormspreeForm({
+    form: document.getElementById("partners-form"),
+    confirm: document.getElementById("partners-confirm"),
+    error: document.getElementById("partners-error"),
+    submitLabel: "事前登録する",
+    doneText: "事前登録ありがとうございます。内容を確認のうえ、ご連絡いたします。",
+    tag: "partners",
+  });
+
+  wireFormspreeForm({
+    form: document.getElementById("join-form"),
+    confirm: document.getElementById("join-confirm"),
+    error: document.getElementById("join-error"),
+    submitLabel: "創刊メンバーに登録する",
+    doneText: "登録ありがとうございます。創刊に向けて、こちらからご連絡します。",
+    tag: "join",
   });
 
   /* ---------------------------------------------------------------
